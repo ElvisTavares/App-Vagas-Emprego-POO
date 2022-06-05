@@ -59,4 +59,17 @@ class Database{
             die('ERROR: '.$e->getMessage());//nunca deixar isso em prod
         }
     }
+
+    public function insert($values)
+    {
+        //dados da query
+        $fields = array_keys($values);
+        $binds = array_pad([], count($fields), '?');
+        // echo "<pre>"; print_r($binds); echo "</pre>"; exit;
+
+        //monta a query
+        $query = 'INSERT INTO ' .$this->table. ' ('.implode(',', $fields).') VALUES ('.implode(',',$binds).')';
+        echo $query;
+        exit();
+    }
 }

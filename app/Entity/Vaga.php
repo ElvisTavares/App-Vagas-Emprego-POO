@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Entity;
-use App\db\Database;
+use \App\db\Database;
+
 class Vaga {
     /**
      * indentificador unico
