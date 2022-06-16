@@ -60,6 +60,20 @@ class Database{
         }
     }
 
+    public function execute($query, $params = [])
+    {
+        try {
+            //code...
+            $statement = $this->connection->prepare($query);
+            $statement->execute($params);
+
+            return $statement;
+
+        } catch (PDOExeception $e) {
+            die('ERROR: '.$e->getMessage());
+        }
+    }
+
     public function insert($values)
     {
         //dados da query
@@ -69,7 +83,25 @@ class Database{
 
         //monta a query
         $query = 'INSERT INTO ' .$this->table. ' ('.implode(',', $fields).') VALUES ('.implode(',',$binds).')';
-        echo $query;
-        exit();
+
+        $this->execute($query, array_values($values));
+
+        return $this->connection->lastInsertId();
+        // echo $query;
+        // exit();
+    }
+
+    public function select($where = null, $order = null, $limit = null, $fields = '*')
+    {
+        //dados da query
+        $where = strlen($where) ? 'WHERE ' .$where : '';
+        $order = strlen($order) ? 'ORDER BY '. $order : '';
+        $limit = strlen($limit) ? 'LIMIT '. $limit : '';
+
+        //monta a query
+
+        $query = 'SELECT '.$fields. ' FROM '.$this->table. ' ' .$where. ' ' .$worder.' ' .$limit;
+
+        return $this->execute($query);
     }
 }

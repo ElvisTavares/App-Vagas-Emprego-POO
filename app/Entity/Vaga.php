@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 use \App\db\Database;
+use \PDO;
 
 class Vaga {
     /**
@@ -44,18 +45,22 @@ class Vaga {
         $this->data = date('Y-m-d H-i-s');
         //inserir a vaga no banco
         $obDatabase = new Database('vagas');
-        $obDatabase->insert([
+        $this->id = $obDatabase->insert([
             'titulo' => $this->titulo,
             'descricao' => $this->descricao,
             'ativo' => $this->ativo,
             'data' => $this->data
         ]);
-        // echo "<pre>";
-        // print_r($obDatabase);
-        // echo "</pre>";
-        // exit;
-        //atribuir o id da vaga na instancia
+        
+        return true;
 
         //retornar sucesso
+    }
+
+    public static function getVagas($where = null, $order = null, $limit= null)
+    {
+        return (new Database('vagas'))->select($where, $order, $limit)
+                                        ->fetchAll(PDO::FETCH_CLASS, self::class)
+        ;
     }
 }
