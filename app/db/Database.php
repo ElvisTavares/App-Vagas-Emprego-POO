@@ -28,7 +28,7 @@ class Database{
      * Senha do banco de dados
      * @var string
      */
-    const PASS = '101010';
+    const PASS = '';
 
     /**
      * Nome da tabela
@@ -100,7 +100,7 @@ class Database{
 
         //monta a query
 
-        $query = 'SELECT '.$fields. ' FROM '.$this->table. ' ' .$where. ' ' .$worder.' ' .$limit;
+        $query = 'SELECT '.$fields. ' FROM '.$this->table. ' ' .$where. ' ' .$order.' ' .$limit;
 
         return $this->execute($query);
     }
