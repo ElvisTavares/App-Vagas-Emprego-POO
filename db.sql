@@ -4,4 +4,6 @@ CREATE TABLE `vagas`.`vaga` (
   `descricao` TEXT NULL,
   `ativo` ENUM('s', 'n') NULL,
   `data` TIMESTAMP NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`)
+  
+  );

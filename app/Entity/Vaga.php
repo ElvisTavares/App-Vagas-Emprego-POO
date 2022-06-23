@@ -63,4 +63,12 @@ class Vaga {
                                         ->fetchAll(PDO::FETCH_CLASS, self::class)
         ;
     }
+
+    //busca uma vaga com base no id passado
+    public static function getVaga($id)
+    {
+        return (new Database('vagas'))->select('id =' .$id)
+                                        ->fetchObject(self::class);
+        ;
+    }
 }
